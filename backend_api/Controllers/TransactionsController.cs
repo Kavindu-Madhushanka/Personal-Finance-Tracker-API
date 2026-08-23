@@ -35,6 +35,7 @@ namespace backend_api.Controllers
                 Amount = transactionDto.Amount,
                 Type = transactionDto.Type,
                 Date=DateTime.Now,
+                UserId = transactionDto.UserId,
 
             };
 

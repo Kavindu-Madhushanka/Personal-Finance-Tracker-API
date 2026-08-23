@@ -1,4 +1,6 @@
-﻿namespace backend_api.Models
+﻿using Microsoft.AspNetCore.SignalR;
+
+namespace backend_api.Models
 {
     public class Transaction
     {
@@ -9,5 +11,7 @@
         public String Type { get; set; } = String.Empty;
 
         public DateTime Date { get; set; } = DateTime.UtcNow;
+
+        public String UserId { get; set; }= String.Empty;
     }
 }
