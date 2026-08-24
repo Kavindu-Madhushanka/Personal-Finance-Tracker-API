@@ -19,13 +19,13 @@ namespace backend_api.Controllers
             _repository = repository;
         }
 
-        [HttpGet]
+        [HttpGet("getall_transactions")]
         public async Task<ActionResult< IEnumerable<Transaction>>> GetTransaction() { 
             var transaction=await _repository.GetAllTransactionsAsync();
             return Ok(transaction);
         }
 
-        [HttpPost]
+        [HttpPost("add_transaction")]
 
         public async Task<ActionResult<Transaction>> PostTransaction(TransactionDto transactionDto)
         {
