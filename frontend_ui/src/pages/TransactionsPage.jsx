@@ -11,7 +11,7 @@ const TransactionsPage = () => {
   const [userId, setUserId] = useState(1);
 
   const fetchTransactions = () => {
-    fetch("http://localhost:5054/api/Transactions/getall_transactions")
+    fetch("http://localhost:8080/api/Transactions/getall_transactions")
       .then((res) => res.json())
       .then((data) => {
         setTransactions(data);
@@ -37,7 +37,7 @@ const TransactionsPage = () => {
       userId: parseInt(userId),
     };
 
-    fetch("http://localhost:5054/api/Transactions/add_transaction", {
+    fetch("http://localhost:8080/api/Transactions/add_transaction", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -57,21 +57,21 @@ const TransactionsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen p-8 bg-gray-100">
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Header */}
-        <div className="bg-white rounded-xl shadow-md p-6">
-          <h1 className="text-2xl font-bold text-gray-800 mb-6">
+        <div className="p-6 bg-white shadow-md rounded-xl">
+          <h1 className="mb-6 text-2xl font-bold text-gray-800">
             💰 Personal Finance Tracker
           </h1>
 
           {/* Add Transaction Form */}
           <form
             onSubmit={handleSubmit}
-            className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8 bg-gray-50 p-4 rounded-lg border"
+            className="grid grid-cols-1 gap-4 p-4 mb-8 border rounded-lg md:grid-cols-4 bg-gray-50"
           >
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block mb-1 text-sm font-medium text-gray-700">
                 Title
               </label>
               <input
@@ -79,13 +79,13 @@ const TransactionsPage = () => {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
-                className="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                className="w-full p-2 border rounded outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Salary, Rent..."
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block mb-1 text-sm font-medium text-gray-700">
                 Amount
               </label>
               <input
@@ -93,19 +93,19 @@ const TransactionsPage = () => {
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 required
-                className="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                className="w-full p-2 border rounded outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="0.00"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block mb-1 text-sm font-medium text-gray-700">
                 Type
               </label>
               <select
                 value={type}
                 onChange={(e) => setType(e.target.value)}
-                className="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                className="w-full p-2 border rounded outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="Income">Income</option>
                 <option value="Expense">Expense</option>
@@ -115,7 +115,7 @@ const TransactionsPage = () => {
             <div className="flex items-end">
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition"
+                className="w-full px-4 py-2 font-semibold text-white transition bg-blue-600 rounded hover:bg-blue-700"
               >
                 Add Transaction
               </button>
@@ -123,7 +123,7 @@ const TransactionsPage = () => {
           </form>
 
           {/* Transactions Table */}
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">
+          <h2 className="mb-4 text-xl font-semibold text-gray-800">
             Transaction History
           </h2>
           {loading ? (
