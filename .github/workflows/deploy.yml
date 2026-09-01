@@ -1,0 +1,32 @@
+name: Deploy to Oracle VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploying API to Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+
+            cd /home/ubuntu/Personal-Finance-Tracker-API 
+
+            git pull origin main
+
+            cd backend_api
+
+            sudo docker build -t my-dotnet-api .
+
+            sudo docker stop api-container || true
+            sudo docker rm api-container || true
+
+            sudo docker run -d -p 80:80 --name api-container my-dotnet-api
