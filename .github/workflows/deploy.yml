@@ -26,7 +26,7 @@ jobs:
 
             sudo docker build -t my-dotnet-api .
 
-            sudo docker stop live_api || true
-            sudo docker rm live_api || true
+            sudo docker stop live-api || true
+            sudo docker rm live-api || true
 
             sudo docker run -d -p 80:80 --name api-container my-dotnet-api
