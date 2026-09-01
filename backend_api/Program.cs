@@ -22,6 +22,17 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowVercel",
+        policy =>
+        {
+            
+            policy.WithOrigins("https://personal-finance-tracker-two-phi.vercel.app/")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
 
 var app = builder.Build();
 
@@ -34,6 +45,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors("AllowReact");
 
 app.UseHttpsRedirection();
+app.UseCors("AllowVercel");
 app.UseAuthorization();
 app.MapControllers();
 
