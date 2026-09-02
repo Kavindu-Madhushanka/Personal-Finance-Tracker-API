@@ -31,4 +31,4 @@ jobs:
             sudo docker stop live-api || true
             sudo docker rm live-api || true
 
-            sudo docker run -d -p 80:80 --name live-api my-dotnet-api
+            sudo docker run -d -p 80:8080 --name live-api my-dotnet-api
