@@ -11,7 +11,7 @@ const TransactionsPage = () => {
   const [userId, setUserId] = useState(1);
 
   const fetchTransactions = () => {
-    fetch("http://localhost:8080/api/Transactions/getall_transactions")
+    fetch("https://92.4.72.4/api/Transactions/getall_transactions")
       .then((res) => res.json())
       .then((data) => {
         setTransactions(data);
@@ -37,7 +37,7 @@ const TransactionsPage = () => {
       userId: parseInt(userId),
     };
 
-    fetch("http://localhost:8080/api/Transactions/add_transaction", {
+    fetch("https://92.4.72.4/api/Transactions/add_transaction", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
