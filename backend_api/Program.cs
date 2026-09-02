@@ -10,29 +10,18 @@ builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowReact",
+    options.AddPolicy("AllowVercel",
         policy =>
         {
-            policy.AllowAnyOrigin()
-                  .AllowAnyMethod()
-                  .AllowAnyHeader();
+            policy.WithOrigins("https://personal-finance-tracker-two-phi.vercel.app") 
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
         });
 });
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowVercel",
-        policy =>
-        {
-            
-            policy.WithOrigins("https://personal-finance-tracker-two-phi.vercel.app/")
-                  .AllowAnyHeader()
-                  .AllowAnyMethod();
-        });
-});
 
 var app = builder.Build();
 
@@ -42,10 +31,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowReact");
-
 app.UseHttpsRedirection();
+
+
 app.UseCors("AllowVercel");
+
 app.UseAuthorization();
 app.MapControllers();
 
